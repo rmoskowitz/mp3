@@ -4,3 +4,9 @@ output: html_document
 ---
 
 new project
+
+```{r}
+library(tidyverse)
+install.packages("sf")
+library(macleish)
+```
