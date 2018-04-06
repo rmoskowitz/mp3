@@ -14,4 +14,8 @@ library(sf)
 practice_miles <- st_read("~/Downloads/ldtrails/LONGDISTTRAILS_ARC.shp")
 
 plot(practice_miles)
+
+contour <-st_read("~/Downloads/hp337/hp337.shp")
+
+plot(contour)
 ```
