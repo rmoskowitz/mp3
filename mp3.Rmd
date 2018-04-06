@@ -8,6 +8,10 @@ new project
 
 ```{r}
 library(tidyverse)
-install.packages("sf")
 library(macleish)
+library(sf)
+
+practice_miles <- st_read("~/Downloads/ldtrails/LONGDISTTRAILS_ARC.shp")
+
+plot(practice_miles)
 ```
