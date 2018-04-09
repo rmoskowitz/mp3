@@ -15,11 +15,9 @@ library(sf)
 
 ```{r}
 #loading elevation data
-practice_miles <- st_read("~/Downloads/ldtrails/LONGDISTTRAILS_ARC.shp")
-
-plot(practice_miles)
-contour <-st_read("~/Downloads/hp337/hp337.shp")
-plot(contour)
+contour1 <-st_read("~/Downloads/hp337/hp337.shp") 
+contour2 <-st_read("~/Downloads/hp68/hp68.shp")
+plot(contour2)
 ```
 
 ```{r}
