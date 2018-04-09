@@ -29,11 +29,11 @@ leaflet() %>%
   addTiles() %>%
   addPolygons(data = macleish_layers[["research"]]) %>%
   addCircleMarkers(data = macleish_layers[["challenge_courses"]]) %>%
-  addPolylines(data = macleish_layers[["trails"]]) %>%
-  addPolylines(data = macleish_layers[["streams"]]) %>%
-  addPolygons(data = macleish_layers[["boundary"]]) %>%
-  addPolygons(data = macleish_layers[["forests"]]) %>%
-  addPolygons(data = macleish_layers[["wetlands"]])
+  addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
+  addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 1) %>%
+  addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 2, opacity = 2) %>%
+  addPolygons(data = macleish_layers[["forests"]], color = "green", weight = 1) %>%
+  addPolygons(data = macleish_layers[["wetlands"]], color = "blue", weight = 1)
 ```
 
 #library(leaflet)
