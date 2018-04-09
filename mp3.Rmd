@@ -27,8 +27,8 @@ plot(contour)
 library(leaflet)
 leaflet() %>%
   addTiles() %>%
-  addPolygons(data = macleish_layers[["research"]]) %>%
-  addCircleMarkers(data = macleish_layers[["challenge_courses"]]) %>%
+  addPolygons(data = macleish_layers[["research"]], color = "red") %>%
+  addCircleMarkers(data = macleish_layers[["challenge_courses"]], color = "red") %>%
   addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
   addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 1) %>%
   addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 2, opacity = 2) %>%
