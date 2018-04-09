@@ -32,7 +32,7 @@ leaflet() %>%
   addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
   addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 1) %>%
   addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 2, opacity = 2) %>%
-  addPolygons(data = macleish_layers[["forests"]], color = "green", weight = 1) %>%
+  addPolygons(data = macleish_layers[["forests"]], color = "green", weight = 1, fill = NA) %>%
   addPolygons(data = macleish_layers[["wetlands"]], color = "blue", weight = 1)
 ```
 
