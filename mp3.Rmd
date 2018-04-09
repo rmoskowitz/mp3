@@ -18,4 +18,19 @@ plot(practice_miles)
 contour <-st_read("~/Downloads/hp337/hp337.shp")
 
 plot(contour)
+
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%
+  addPolylines(data = macleish_layers[["trails"]]) %>%
+  addPolylines(data = macleish_layers[["streams"]]) 
+
+
+#library(leaflet)
+#leaflet(data= contour[["ELEV_M"]]) %>%
+  #addTiles() %>%
+ # addPolygons(data=macleish_layers[["forests"]], color = "grey", weight = 1)
+```
+
+
 ```
