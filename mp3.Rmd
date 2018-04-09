@@ -11,20 +11,30 @@ library(tidyverse)
 library(macleish)
 library(sf)
 
+```
+
+```{r}
+#loading elevation data
 practice_miles <- st_read("~/Downloads/ldtrails/LONGDISTTRAILS_ARC.shp")
 
 plot(practice_miles)
-
 contour <-st_read("~/Downloads/hp337/hp337.shp")
-
 plot(contour)
+```
+
+```{r}
 
 library(leaflet)
 leaflet() %>%
   addTiles() %>%
+  addPolygons(data = macleish_layers[["research"]]) %>%
+  addCircleMarkers(data = macleish_layers[["challenge_courses"]]) %>%
   addPolylines(data = macleish_layers[["trails"]]) %>%
-  addPolylines(data = macleish_layers[["streams"]]) 
-
+  addPolylines(data = macleish_layers[["streams"]]) %>%
+  addPolygons(data = macleish_layers[["boundary"]]) %>%
+  addPolygons(data = macleish_layers[["forests"]]) %>%
+  addPolygons(data = macleish_layers[["wetlands"]])
+```
 
 #library(leaflet)
 #leaflet(data= contour[["ELEV_M"]]) %>%
