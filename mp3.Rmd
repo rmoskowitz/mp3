@@ -24,14 +24,15 @@ contour2 <- st_as_sf(contour_conway)  %>%
   st_transform(contour_conway, crs = 4326)
 class(contour1)
 class(contour2)
+```
 
+```{r}
 #joining datasets (doesn't work as of now... not necessary??)
 full_contour <- inner_join(contour1, contour2, by = c("ELEV_FT" = "ELEV_FT"))
 full_contour
 ```
 
 ```{r}
-
 library(leaflet)
 leaflet() %>%
   addTiles() %>%
