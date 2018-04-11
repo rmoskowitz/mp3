@@ -6,8 +6,10 @@ output: html_document
 
 ```{r}
 library(tidyverse)
-library(macleish)
 library(sf)
+library(macleish)
+packageVersion("macleish")
+names(macleish_layers)
 ```
 
 ```{r}
