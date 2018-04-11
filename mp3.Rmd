@@ -41,20 +41,27 @@ leaflet() %>%
   addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1)
 ```
 
+MacLeish currently has two campsites - one large group site closer to the building and one remote campsite with two tent platforms about one mile from the parking area. We would like to develop one additional campsite that is approximately half a mile walk from the parking area, within 200’ of a stream or other source of water, in forest that is unlike the forest in the two other campsites, relatively flat, and at least 500’ from any research area or any element of the Challenge Course. Propose two new campsite locations for our consideration.
+
 To-do
 
 Spatial data & computations
+- get vegetation data to display in a way that makes sense!!
+- figure out how to add group campsites and two remote campsites to our info --> add little markers or circles (addSyntax)
+- use buffers to figure or measuring length 
 - spatial computations
 - ask about automatically zooming in more on the map
 
 Writing & formatting:
 - write problem statement
+- propose 2 campsites
 - 500-800 word description w/ reccommendation
 - include a short discussion on the resources necessary to implement your recommendation:
 what will it cost?
 how long will it take?
 are there any concerns about environmental impact?
 do you see any major roadblocks?
+- include relevant external information (look at macleish info)
 -reformatting the page: use bootswatch to add a theme: and a highlight: in yaml
 - df_print
 
