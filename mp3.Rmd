@@ -49,7 +49,7 @@ how long will it take?
 are there any concerns about environmental impact?
 do you see any major roadblocks?
 
-We used a github repository
+We used a github repository [^1]
 
 ```{r}
 #joining datasets (doesn't work as of now... not necessary??)
@@ -58,4 +58,4 @@ full_contour
 ```
 
 
-```
+[^1]: [Link to github repository](https://github.com/rmoskowitz/mp3)
