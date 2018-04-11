@@ -11,23 +11,9 @@ library(sf)
 ```
 
 ```{r}
-#download contour data x2 shapefiles
-url <- 
-local_file <-
-download.file(url, destfile = local_file)
-unzip(local_file, exdir = "")
-
-url <- 
-local_file <-
-download.file(url, destfile = local_file)
-unzip(local_file, exdir = "")
-```
-
-```{r}
 #reading downloaded 3m contour data from MassGIS 
 contour_what <- st_read("~/Downloads/hp337/hp337.shp") 
 contour_conway <-st_read("~/Downloads/hp68/hp68.shp")
-local_file <- 
 
 #converting these two shapefiles to sf and changing projection to match macleish_layers
 contour1 <- st_as_sf(contour_what) %>% 
@@ -54,6 +40,7 @@ leaflet() %>%
 ```
 
 To-do
+- spatial computations
 - ask about automatically zooming in more on the map
 - write problem statement
 - 500-800 word description w/ reccommendation
@@ -64,12 +51,6 @@ are there any concerns about environmental impact?
 do you see any major roadblocks?
 
 We used a github repository [^1]
-
-```{r}
-#joining datasets (doesn't work as of now... not necessary??)
-full_contour <- inner_join(contour1, contour2, by = c("ELEV_FT" = "ELEV_FT"))
-full_contour
-```
 
 
 [^1]: [Link to github repository](https://github.com/rmoskowitz/mp3)
