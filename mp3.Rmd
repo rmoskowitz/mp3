@@ -10,6 +10,7 @@ library(sf)
 devtools::install_github("beanumber/macleish")
 library(macleish)
 packageVersion("macleish")
+rm(macleish_layers)
 names(macleish_layers)
 ```
 
