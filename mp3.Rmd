@@ -2,9 +2,7 @@
 title: "mp3"
 output: html_document
 ---
-Some new text
 
-new project
 
 ```{r}
 library(tidyverse)
@@ -41,11 +39,17 @@ leaflet() %>%
   addPolylines(data = contour2, color = "black", weight = 1) 
 ```
 
-#library(leaflet)
-#leaflet(data= contour[["ELEV_M"]]) %>%
-  #addTiles() %>%
- # addPolygons(data=macleish_layers[["forests"]], color = "grey", weight = 1)
-```
+To-do
+- ask about automatically zooming in more on the map
+- write problem statement
+- 500-800 word description w/ reccommendation
+- include a short discussion on the resources necessary to implement your recommendation:
+what will it cost?
+how long will it take?
+are there any concerns about environmental impact?
+do you see any major roadblocks?
+
+We used a github repository
 
 ```{r}
 #joining datasets (doesn't work as of now... not necessary??)
