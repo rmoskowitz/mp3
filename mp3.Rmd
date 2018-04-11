@@ -11,9 +11,23 @@ library(sf)
 ```
 
 ```{r}
+#download contour data x2 shapefiles
+url <- 
+local_file <-
+download.file(url, destfile = local_file)
+unzip(local_file, exdir = "")
+
+url <- 
+local_file <-
+download.file(url, destfile = local_file)
+unzip(local_file, exdir = "")
+```
+
+```{r}
 #reading downloaded 3m contour data from MassGIS 
 contour_what <- st_read("~/Downloads/hp337/hp337.shp") 
 contour_conway <-st_read("~/Downloads/hp68/hp68.shp")
+local_file <- 
 
 #converting these two shapefiles to sf and changing projection to match macleish_layers
 contour1 <- st_as_sf(contour_what) %>% 
