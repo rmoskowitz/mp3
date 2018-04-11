@@ -27,12 +27,6 @@ class(contour2)
 ```
 
 ```{r}
-#joining datasets (doesn't work as of now... not necessary??)
-full_contour <- inner_join(contour1, contour2, by = c("ELEV_FT" = "ELEV_FT"))
-full_contour
-```
-
-```{r}
 library(leaflet)
 leaflet() %>%
   addTiles() %>%
@@ -51,6 +45,12 @@ leaflet() %>%
 #leaflet(data= contour[["ELEV_M"]]) %>%
   #addTiles() %>%
  # addPolygons(data=macleish_layers[["forests"]], color = "grey", weight = 1)
+```
+
+```{r}
+#joining datasets (doesn't work as of now... not necessary??)
+full_contour <- inner_join(contour1, contour2, by = c("ELEV_FT" = "ELEV_FT"))
+full_contour
 ```
 
 
