@@ -1,6 +1,11 @@
 ---
 title: "mp3"
-output: html_document
+author: Rachel Moskowitz, Sonia Garfinkel, and Greta Mundt
+output: 
+  html_document:
+    df_print: paged
+    code_folding: hide
+    theme: "journal"
 ---
 
 Problem statement: 
