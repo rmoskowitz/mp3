@@ -11,6 +11,12 @@ output:
 Problem statement: MacLeish currently has two campsites - one large group site closer to the building and one remote campsite with two tent platforms about one mile from the parking area. We would like to develop one additional campsite that is approximately half a mile walk from the parking area, within 200’ of a stream or other source of water, in forest that is unlike the forest in the two other campsites, relatively flat, and at least 500’ from any research area or any element of the Challenge Course. Propose two new campsite locations for our consideration.
 
 
+We used a github repository [^1]
+
+
+- propose 2 campsites
+- 500-800 word description w/ reccommendation
+
 ```{r, eval = FALSE}
 library(tidyverse)
 library(sf)
@@ -28,7 +34,6 @@ group_campsight <- data.frame(lat = 42.450976, lon = -72.678154)
 
 ```{r}
 library(leaflet)
-
 leaflet() %>%
   addTiles() %>%
   addPolygons(data = macleish_layers[["research"]], color = "red") %>%
@@ -59,20 +64,17 @@ Spatial data & computations
 - spatial computations
 - ask about automatically zooming in more on the map
 
-Writing & formatting:
-- write problem statement
-- propose 2 campsites
-- 500-800 word description w/ reccommendation
+
+
 - include a short discussion on the resources necessary to implement your recommendation:
 what will it cost?
 how long will it take?
 are there any concerns about environmental impact?
 do you see any major roadblocks?
-- include relevant external information (look at macleish info)
--reformatting the page: use bootswatch to add a theme: and a highlight: in yaml
-- df_print
 
-We used a github repository [^1]
+
+- include relevant external information (look at macleish info)
+
 
 
 [^1]: [Link to github repository](https://github.com/rmoskowitz/mp3)
