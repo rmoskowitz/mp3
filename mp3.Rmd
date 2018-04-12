@@ -3,6 +3,7 @@ title: "mp3"
 output: html_document
 ---
 
+Problem statement: 
 
 ```{r}
 library(tidyverse)
@@ -39,6 +40,11 @@ leaflet() %>%
 
 
 MacLeish currently has two campsites - one large group site closer to the building and one remote campsite with two tent platforms about one mile from the parking area. We would like to develop one additional campsite that is approximately half a mile walk from the parking area, within 200’ of a stream or other source of water, in forest that is unlike the forest in the two other campsites, relatively flat, and at least 500’ from any research area or any element of the Challenge Course. Propose two new campsite locations for our consideration.
+
+
+make a buffer around a half mile walk from the parking area
+buffer around 200' of a stream of water source
+in forest unlike the other forest 
 
 To-do
 
