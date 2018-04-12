@@ -14,25 +14,13 @@ rm(macleish_layers)
 names(macleish_layers)
 ```
 
-```{r}
-#reading downloaded 3m contour data from MassGIS 
-contour_what <- st_read("~/Downloads/hp337/hp337.shp") 
-contour_conway <-st_read("~/Downloads/hp68/hp68.shp")
 
-#converting these two shapefiles to sf and changing projection to match macleish_layers
-contour1 <- st_as_sf(contour_what) %>% 
-  st_transform(contour_what, crs = 4326)
-contour2 <- st_as_sf(contour_conway)  %>% 
-  st_transform(contour_conway, crs = 4326)
-class(contour1)
-class(contour2)
+```{r}
+group_campsight <- data.frame(lat = 42.450976, lon = -72.678154)
 ```
 
 ```{r}
 library(leaflet)
-
-group_campsight <- data.frame(lat = 42.450976, lon = -72.678154)
-
 
 leaflet() %>%
   addTiles() %>%
