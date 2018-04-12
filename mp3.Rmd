@@ -23,17 +23,17 @@ library(sf)
 devtools::install_github("beanumber/macleish")
 library(macleish)
 packageVersion("macleish")
-rm(macleish_layers)
-names(macleish_layers)
+library(leaflet)
 ```
 
 
-```{r, eval = FALSE}
-group_campsight <- data.frame(lat = 42.450976, lon = -72.678154)
+```{r}
+group_campsite1 <- data.frame(lat = 42.450976, lon = -72.678154)
+group_campsite2 <-data.frame(lat = 42.458549, lon = -72.679581)
+parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 ```
 
 ```{r}
-library(leaflet)
 leaflet() %>%
   addTiles() %>%
   addPolygons(data = macleish_layers[["research"]], color = "red") %>%
@@ -44,12 +44,13 @@ leaflet() %>%
   addPolygons(data = macleish_layers[["forests"]], color = "green", weight = 1, fill = NA) %>%
   addPolygons(data = macleish_layers[["wetlands"]], color = "blue", weight = 1) %>%
   addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1) %>%
-  addMarkers(lng = ~lon, lat = ~lat, data = group_campsight, popup = "Current Group Campsite") 
-
-
+  addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
+  addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
+  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)")
 ```
 
-
+  addMarkers(lng = ~lon, lat = ~lat, data = campsite, popup = "Current Group Campsite") 
+  
 
 make a buffer around a half mile walk from the parking area
 buffer around 200' of a stream of water source
