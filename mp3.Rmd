@@ -21,9 +21,12 @@ We used a github repository [^1]
 library(tidyverse)
 library(sf)
 devtools::install_github("beanumber/macleish")
+library(leaflet)
+```
+
+```{r}
 library(macleish)
 packageVersion("macleish")
-library(leaflet)
 ```
 
 
