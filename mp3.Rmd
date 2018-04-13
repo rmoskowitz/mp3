@@ -39,8 +39,6 @@ parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 #use st_sf()????
 
 #transforming data.frame to an sf object
-
-
 parking_sf <- parking_lot %>%
   st_as_sf(coords = c("lat", "lon")) %>%
   st_transform(4326)
@@ -62,7 +60,7 @@ challenge_buffer <- macleish_layers[["challenge_courses"]] %>%
   st_buffer(dist = 0.001371)
 
 parking_buffer <- parking_sf %>%
-  st_buffer(dist = )
+  st_buffer(dist = 0.0072414633)
 
 ```
 
@@ -140,10 +138,13 @@ Notes for map: add legend ( addLegend("bottomright",
 
 #####Resources necessary to implement this recommendation
 - These two campsites will cost
-- This will take....
+- This will take....will cost $200 for tent platform, $3000 for lean-to (according to Reid Bertone-Johnson)
 - Concerns about environmental impact
 - major roadblocks...
-
+- can take a day for a tent platform, can  take several months to create a lean-to
+- no additional labor costs, $$ gets absorbed by CEEDS
+- main env concern== wants it to be close to a stream but not far enough away to cause erosion 
+- generall not really runoff problems from where they clear land because it just gets absobed by trees further down
 
 - Include relevant external information (look at macleish info)
 
