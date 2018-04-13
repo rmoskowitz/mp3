@@ -1,5 +1,5 @@
 ---
-title: "Mini Project 3"
+title: "Catchy Title- Something In-Tents Mp3"
 author: Rachel Moskowitz, Sonia Garfinkel, and Greta Mundt
 output: 
   html_document:
@@ -36,9 +36,10 @@ group_campsite2 <-data.frame(lat = 42.458549, lon = -72.679581)
 parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 
 #how we changed them into spatial objects... sf process?
+#use st_sf()????
 ```
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #starting to work on buffers to determine where these campsites should go 
 macleish_layers[["streams"]] %>%
   st_buffer(dist = 0.1)
@@ -54,6 +55,13 @@ macleish_layers[["streams"]] %>%
 
 
 ```{r}
+#define color palettes (for forest & for wetlands...)
+wetland_pal <- colorNumeric("viridis", 
+                  macleish_layers[["wetlands"]]$SHAPE_AREA)
+```
+
+```{r}
+#interactive leaflet map w/ macleish_layers and own data added
 leaflet() %>%
   addTiles() %>%
 
