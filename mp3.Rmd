@@ -39,7 +39,11 @@ parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 #use st_sf()????
 
 #transforming data.frame to an sf object
-parking_sf <- st_as_sf(parking_lot)
+
+
+parking_sf <- parking_lot %>%
+  st_as_sf(coords = c("lat", "lon")) %>%
+  st_transform(4326)
 
 ```
 
@@ -54,16 +58,25 @@ df_buf <- st_buffer(df_crs, dist = 1000)
 ```{r}
 #decimal degrees to feet in order to correctly buffer
 stream_buffer <- macleish_layers[["streams"]] %>%
-  st_buffer(dist = 200)
+  st_buffer(dist = 0.000549) %>%
+  st_transform(4326)
+
+leaflet() %>%
+  addTiles() %>%
+  addPolylines(data = macleish_layers[["streams"]], 
+               weight = 1, color = "black") %>%
+  addPolygons(data = stream_buffer) 
+
 
 research_buffer <- macleish_layers[["research"]] %>%
   st_buffer(dist = 500)
 
 challenge_buffer <- macleish_layers[["challenge_course"]] %>%
-  st_buffer(dist = 500)
+  #st_buffer(dist = )
 
-parking_buffer <- 
+parking_buffer <- parking_sf 
 
+plot(stream_buffer)
 #try to convert decimal degrees... to 200' 
 #500' buffer from any research area or any element of the challenge course
 
@@ -109,7 +122,10 @@ leaflet() %>%
   
   addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
   
-  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") 
+  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
+  
+  addPolygons(data = stream_buffer) 
+  
   
 ```
 
