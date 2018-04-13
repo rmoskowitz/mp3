@@ -1,14 +1,15 @@
 ---
 title: "Camping is In-Tents: MacLeish Site Recommendations"
 author: Rachel Moskowitz, Sonia Garfinkel, and Greta Mundt
+date: April 13, 2018
 output: 
   html_document:
     df_print: paged
     code_folding: hide
     theme: "journal"
 ---
+
 To- do
-- Rachel put in points for intended campsite
 - Greta and Sonia work together on all the aesthetics, make the maps super pretty 
 - Greta work on writing up the "resources necessary to implement"
 - Rachel work on "campsite recommendation"
@@ -92,7 +93,9 @@ This map shows.... (explain the buffers etc)
 click on different areas of the map to discover the vegetation type 
 
 ```{r}
+
 #interactive leaflet map w/ macleish_layers and own data added
+
 leaflet() %>%
   addTiles() %>%
 
@@ -125,7 +128,7 @@ leaflet() %>%
   addPolygons(data = stream_buffer, stroke = TRUE, weight = 1, fill = TRUE)  %>%
   
 #adding the buffer: union of research and challenge course
-  addPolygons(data = res_challenge_union, fill = TRUE, color = "red", stroke = FALSE) %>%
+  addPolygons(data = res_challenge_union, fill = TRUE, fillOpacity = 2, color = "red", stroke = FALSE) %>%
   
   addPolygons(data = parking_buffer, fill = TRUE, color = "brown", stroke = FALSE)
 ```
@@ -136,23 +139,14 @@ Our second map shows the two campsites we have proposed.
 
 ```{r}
 #add two new campsites as data.frames
-new_campsite1 <-data.frame(lat = , lon = -)
-new_campsite2 <-data.frame(lat = , lon = )
-  
-#convert new campsites to sf objects
-new_1 <- new_campsite1 %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4326)
-
-new_2 <- new_campsite2 %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4326)
-
+new_campsite1 <-data.frame(lat= 42.445917, lon = -72.679673)
+new_campsite2 <-data.frame(lat = 42.448911, lon = -72.673964)
 ```
 
 ```{r}
 #leaflet- map #2 with tiles and base polylines and polygons
 leaflet() %>%
   addTiles() %>%
-  
     addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
   
   addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 3) %>%
@@ -166,9 +160,9 @@ leaflet() %>%
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
 
   #addition of two proposed sites w/out any buffers
-    addMarkers(lng= ~lon, lat = ~lat, data = new_1, popup = "Proposed Group Campsite #1") %>%
+      addMarkers( data = new_campsite1, popup = "Proposed Group Campsite #1") %>%
 
-  addMarkers(lng= ~lon, lat = ~lat, data = new_2, popup = "Proposed Group Campsite #2")
+    addMarkers(data = new_campsite2, popup = "Proposed Group Campsite #2")
   
 ```
 
