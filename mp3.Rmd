@@ -13,6 +13,8 @@ To- do
 - Greta and Sonia work together on all the aesthetics, make the maps super pretty 
 - Greta work on writing up the "resources necessary to implement"
 - Rachel work on "campsite recommendation"
+--> thoughts about a 3rd map (displayed first, that JUST shows vegetation type? with a color palette like == wetland_pal <- colorNumeric("viridis", 
+                  macleish_layers[["wetlands"]]$SHAPE_AREA) but obviously not for wetlands, for forests??)
 
 #####Problem statement: 
 MacLeish currently only has two campsites, one large group site close to the building, and a remote campsite with two tent platforms a mile away. There is a need for an additional campsite at the field station. There is an interest in developing a new campsite half a mile away from the parking area, within 200' of a stream or water source, 500' away from any research area or Challenge Course element, in a forest unlike the forest of the other two campsites, and relatively flat. All of these components must be present in a new campsite for consideration.
