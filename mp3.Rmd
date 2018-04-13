@@ -54,8 +54,13 @@ leaflet() %>%
   addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1) %>%
   addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
   addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
-  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)")
+  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
+  
 ```
+
+Notes for map: add legend ( addLegend("bottomright", 
+    title = "MacLeish Layers",
+    opacity = 1) ??) --> try to simplify as much as possible 
 
 
 #####Resources necessary to implement this recommendation
@@ -65,7 +70,7 @@ leaflet() %>%
 - major roadblocks...
 
 
-- include relevant external information (look at macleish info)
+- Include relevant external information (look at macleish info)
 
 
 [^1]: [Link to github repository](https://github.com/rmoskowitz/mp3)
