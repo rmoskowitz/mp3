@@ -37,12 +37,32 @@ parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 
 #how we changed them into spatial objects... sf process?
 #use st_sf()????
+
+#transforming data.frame to an sf object
+parking_sf <- st_as_sf(parking_lot)
+
 ```
 
-```{r, message = FALSE, warning = FALSE}
-#starting to work on buffers to determine where these campsites should go 
-macleish_layers[["streams"]] %>%
-  st_buffer(dist = 0.1)
+```{r}
+#transform the points to match the macleish crs
+df_crs <- st_transform(df_sf, crs = crs(manhattan, asText = TRUE))
+
+#buffer the point
+df_buf <- st_buffer(df_crs, dist = 1000)
+```
+
+```{r}
+#decimal degrees to feet in order to correctly buffer
+stream_buffer <- macleish_layers[["streams"]] %>%
+  st_buffer(dist = 200)
+
+research_buffer <- macleish_layers[["research"]] %>%
+  st_buffer(dist = 500)
+
+challenge_buffer <- macleish_layers[["challenge_course"]] %>%
+  st_buffer(dist = 500)
+
+parking_buffer <- 
 
 #try to convert decimal degrees... to 200' 
 #500' buffer from any research area or any element of the challenge course
