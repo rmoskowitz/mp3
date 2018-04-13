@@ -9,16 +9,18 @@ output:
 ---
 
 #####Problem statement: 
-MacLeish currently has two campsites - one large group site closer to the building and one remote campsite with two tent platforms about one mile from the parking area. We would like to develop one additional campsite that is approximately half a mile walk from the parking area, within 200’ of a stream or other source of water, in forest that is unlike the forest in the two other campsites, relatively flat, and at least 500’ from any research area or any element of the Challenge Course. Propose two new campsite locations for our consideration.
+MacLeish currently only has two campsites, one large group site close to the building, and a remote campsite with two tent platforms a mile away. There is a need for an additional campsite at the field station. There is an interest in developing a new campsite half a mile away from the parking area, within 200' of a stream or water source, 500' away from any research area or Challenge Course element, in a forest unlike the forest of the other two campsites, and relatively flat. All of these components must be present in a new campsite for consideration.
 
 
 #####Campsite recommendation
-Propose TWO campsite locations == make markers on the MAP
-make a buffer around a half mile walk from the parking area
-buffer around 200' of a stream of water source
-in forest unlike the other forest types -- not in an Old Field White Pine Forest OR a Sugar Maple Forest
+Our project proposese two new potential campsite locations for MacLeish. Our final recommendations for new campsite locations are shown in our map below with blue pop up identifiers. We used a github repository in order to keep track of and evaluate the spatial data necessary for making our recommendations [^1]. These locations were chosen based on the following criteria and spatial analysis procedures.
+1. Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these popups on the map below. We knew we could not place our new proposed campsites in either of these vegetation types. The limited our proposed campsites. We chose to place these campsites within the (name two other vegetation types)
+2. water source buffer info
+3. research and challenge course info
+4. away from parking lot info
+5. relatively flat info
+How we came to our final decision
 
-We used a github repository [^1]
 
 ```{r,  message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -28,31 +30,37 @@ library(leaflet)
 ```
 
 ```{r}
+#here we added new data points to our workflow
 group_campsite1 <- data.frame(lat = 42.450976, lon = -72.678154)
 group_campsite2 <-data.frame(lat = 42.458549, lon = -72.679581)
 parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
+
+#how we changed them into spatial objects... sf process?
 ```
 
 ```{r}
+#starting to work on buffers to determine where these campsites should go 
 macleish_layers[["streams"]] %>%
   st_buffer(dist = 0.1)
 
-**try to convert decimal degrees... to 200' **
-**500' buffer from any research area or any element of the challenge course**
+#try to convert decimal degrees... to 200' 
+#500' buffer from any research area or any element of the challenge course
 
-new_parking_lot <- st_as_sf(parking_lot)
-  st_buffer(dist = 0.5)
+#new_parking_lot <- st_as_sf(parking_lot)
+  #st_buffer(dist = 0.5)
   
-  ^^ how to buffer the parking lot??
-    
+  #how to buffer the parking lot??
 ```
+
 
 ```{r}
 leaflet() %>%
   addTiles() %>%
-  
+
+  #how we showed the vegetation type with popups..
   addPolygons(data = macleish_layers[["forests"]], color = "green", opacity = 5,  weight = 1, popup = ~Sheet1__Na) %>%
   
+  #how we showed the wetlands 
    addPolygons(data = macleish_layers[["wetlands"]], 
               color = "blue", 
               fillOpacity = 0.8, weight = 0.1, 
@@ -66,7 +74,7 @@ leaflet() %>%
   addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1) %>%
   addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
   addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
-  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
+  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") 
   
 ```
 
