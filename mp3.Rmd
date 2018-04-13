@@ -1,5 +1,5 @@
 ---
-title: "Catchy Title- Something In-Tents Mp3"
+title: "Something In-Tents Mp3"
 author: Rachel Moskowitz, Sonia Garfinkel, and Greta Mundt
 output: 
   html_document:
