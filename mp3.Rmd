@@ -117,8 +117,8 @@ leaflet() %>%
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
   
   addPolygons(data = stream_buffer)  %>%
-  addPolygons(data = research_buffer, color = "red") %>% addPolygons(data = challenge_buffer, color = "red") %>%
-  addPolygons(data = parking_buffer)
+  addPolygons(data = research_buffer, color = "red") %>% addPolygons(data = challenge_buffer, color = "red", stroke = FALSE) %>%
+  addPolygons(data = parking_buffer, color = "brown", stroke = FALSE, weight = 1, opacity = 1)
 ```
 
 
@@ -126,7 +126,6 @@ Our second map shows the two campsites we have proposed.
 ```{r}
 leaflet() %>%
   addTiles() %>%
-  addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1) %>%
   
     addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
   
