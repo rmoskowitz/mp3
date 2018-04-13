@@ -1,5 +1,5 @@
 ---
-title: "Something In-Tents Mp3"
+title: "Camping is so In-Tents: MacLeish Site Recommendations"
 author: Rachel Moskowitz, Sonia Garfinkel, and Greta Mundt
 output: 
   html_document:
