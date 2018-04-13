@@ -73,9 +73,9 @@ wetland_pal <- colorNumeric("viridis",
                   macleish_layers[["wetlands"]]$SHAPE_AREA)
 ```
 
-
 Interactive map with buffers: research
 This map shows.... (explain the buffers etc)
+
 ```{r}
 #interactive leaflet map w/ macleish_layers and own data added
 leaflet() %>%
