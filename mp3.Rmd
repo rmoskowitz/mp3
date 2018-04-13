@@ -76,12 +76,19 @@ leaflet() %>%
   
     addPolygons(data = macleish_layers[["research"]], color = "red", weight = 1, opacity = 2) %>%
   addCircleMarkers(data = macleish_layers[["challenge_courses"]], color = "red", weight = 1, opacity = 2) %>%
+  
   addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
+  
   addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 3) %>%
+  
   addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 2, opacity = 2) %>%
+  
   addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1) %>%
+  
   addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
+  
   addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
+  
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") 
   
 ```
