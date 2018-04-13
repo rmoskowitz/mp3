@@ -1,5 +1,5 @@
 ---
-title: "Camping is so In-Tents: MacLeish Site Recommendations"
+title: "Camping is In-Tents: MacLeish Site Recommendations"
 author: Rachel Moskowitz, Sonia Garfinkel, and Greta Mundt
 output: 
   html_document:
@@ -9,7 +9,6 @@ output:
 ---
 To- do
 - Rachel put in points for intended campsite
-- Sonia figure out the st_union for research and challenge
 - Greta and Sonia work together on all the aesthetics, make the maps super pretty :)
 - Greta work on writing up the "resources necessary to implement"
 - Rachel work on "campsite recommendation"
@@ -124,12 +123,12 @@ leaflet() %>%
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
 
 #add stream buffer 
-  addPolygons(data = stream_buffer)  %>%
+  addPolygons(data = stream_buffer, stroke = TRUE, weight = 1, fill = TRUE)  %>%
   
 #adding the buffer: union of research and challenge course
-  addPolygons(data = res_challenge_union, color = "red", weight = 1, opacity = 1, stroke = FALSE) %>%
+  addPolygons(data = res_challenge_union, fill = TRUE, fillColor = "red", fillOpacity = 5, stroke = FALSE) %>%
   
-  addPolygons(data = parking_buffer, color = "brown", stroke = FALSE, weight = 1, opacity = 1)
+  addPolygons(data = parking_buffer, fill = TRUE, color = "brown", stroke = FALSE)
 ```
 
 
