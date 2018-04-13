@@ -37,42 +37,49 @@ library(leaflet)
 ```
 
 ```{r}
-#here we added new data points to our workflow
+#we added the existing group campsites as data.frames
 group_campsite1 <- data.frame(lat = 42.450976, lon = -72.678154)
 group_campsite2 <-data.frame(lat = 42.458549, lon = -72.679581)
+#adding the parking lot as a data.frame
 parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 
-#transforming data.frame to an sf object
+#transforming parking lot data.frame to an sf object with defined projection
 parking_sf <- parking_lot %>%
   st_as_sf(coords = c("lon", "lat"), crs = 4326)
 
-proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 ```
 
 
 ```{r}
-#decimal degrees to feet in order to correctly buffer
+#projection for our buffers
+proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
+
+#making a buffer of 200' for the stream, have to convert feet to meters for the distqnce and put it all in the correct projection system 
 stream_buffer <- macleish_layers[["streams"]] %>%
   st_transform(proj4_aea) %>%
    st_buffer(dist = 60.96) %>%
   st_transform(4326)
 
-#this is the research buffer, translated to decimal degrees
+#this is the research buffer, with conversions for meters 
 research_buffer <- macleish_layers[["research"]] %>%
    st_transform(proj4_aea) %>%
   st_buffer(dist = 152.4) %>%
   st_transform(4326)
  
+#500' buffer around challenge courses
 challenge_buffer <- macleish_layers[["challenge_courses"]] %>%
    st_transform(proj4_aea) %>%
   st_buffer(dist = 152.4) %>%
   st_transform(4326)
 
+#half a mile buffer around our parking object
 parking_buffer <- parking_sf %>%
   st_transform(proj4_aea) %>%
   st_buffer(dist = 804.7) %>%
   st_transform(4326)
 
+#use st_union() to group challenge course buffer and research buffers together
+res_challenge_union <- st_union(challenge_buffer, research_buffer, by_feature = FALSE)
 ```
 
 
@@ -84,25 +91,24 @@ wetland_pal <- colorNumeric("viridis",
 
 Interactive map with buffers: research
 This map shows.... (explain the buffers etc)
+click on different areas of the map to discover the vegetation type 
 
 ```{r}
 #interactive leaflet map w/ macleish_layers and own data added
 leaflet() %>%
   addTiles() %>%
 
-  #how we showed the vegetation type with popups..
+#displaying types of vegetation with popups
   addPolygons(data = macleish_layers[["forests"]], color = "green", opacity = 5,  weight = 1, popup = ~Sheet1__Na) %>%
   
-  #how we showed the wetlands 
+#how we showed the wetlands with popups
    addPolygons(data = macleish_layers[["wetlands"]], 
               color = "blue", 
               fillOpacity = 0.8, weight = 0.1, 
               popup = ~IT_VALDESC) %>%
   
-    addPolygons(data = macleish_layers[["research"]], color = "red", weight = 1, opacity = 2) %>%
-  addCircleMarkers(data = macleish_layers[["challenge_courses"]], color = "red", weight = 1, opacity = 2) %>%
-  
-  addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
+#add trails, streams, boundary, and contours as layers
+  addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 2) %>%
   
   addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 3) %>%
   
@@ -110,20 +116,42 @@ leaflet() %>%
   
   addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1) %>%
   
+#add existing campsites and parking lot as popups
   addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
   
   addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
   
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
-  
+
+#add stream buffer 
   addPolygons(data = stream_buffer)  %>%
-  addPolygons(data = research_buffer, color = "red") %>% addPolygons(data = challenge_buffer, color = "red", stroke = FALSE) %>%
+  
+#adding the buffer: union of research and challenge course
+  addPolygons(data = res_challenge_union, color = "red", weight = 1, opacity = 1, stroke = FALSE) %>%
+  
   addPolygons(data = parking_buffer, color = "brown", stroke = FALSE, weight = 1, opacity = 1)
 ```
 
 
 Our second map shows the two campsites we have proposed.
+
+
 ```{r}
+#add two new campsites as data.frames
+new_campsite1 <-data.frame(lat = , lon = -)
+new_campsite2 <-data.frame(lat = , lon = )
+  
+#convert new campsites to sf objects
+new_1 <- new_campsite1 %>%
+  st_as_sf(coords = c("lon", "lat"), crs = 4326)
+
+new_2 <- new_campsite2 %>%
+  st_as_sf(coords = c("lon", "lat"), crs = 4326)
+
+```
+
+```{r}
+#leaflet- map #2 with tiles and base polylines and polygons
 leaflet() %>%
   addTiles() %>%
   
@@ -132,16 +160,20 @@ leaflet() %>%
   addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 3) %>%
   
   addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 2, opacity = 2) %>%
-
   
   addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
   
   addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
   
-  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)")
+  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
 
-#add two new proposed sites without the addition of buffers
+  #addition of two proposed sites w/out any buffers
+    addMarkers(lng= ~lon, lat = ~lat, data = new_1, popup = "Proposed Group Campsite #1") %>%
+
+  addMarkers(lng= ~lon, lat = ~lat, data = new_2, popup = "Proposed Group Campsite #2")
+  
 ```
+
 Notes for map: add legend ( addLegend("bottomright", 
     title = "MacLeish Layers",
     opacity = 1) ??) --> try to simplify as much as possible 
@@ -149,11 +181,11 @@ Notes for map: add legend ( addLegend("bottomright",
 
 #####Resources necessary to implement this recommendation
 - These two campsites will cost
-- This will take....will cost $200 for tent platform, $3000 for lean-to (according to Reid Bertone-Johnson)
+- This will take....will cost 200 dollars for tent platform, 3000 dollars for lean-to (according to Reid Bertone-Johnson)
 - Concerns about environmental impact
 - major roadblocks...
 - can take a day for a tent platform, can  take several months to create a lean-to
-- no additional labor costs, $$ gets absorbed by CEEDS
+- no additional labor costs, money gets absorbed by CEEDS
 - main env concern== wants it to be close to a stream but not far enough away to cause erosion 
 - generall not really runoff problems from where they clear land because it just gets absobed by trees further down
 
