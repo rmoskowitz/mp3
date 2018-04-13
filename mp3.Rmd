@@ -69,10 +69,10 @@ leaflet() %>%
 
 
 research_buffer <- macleish_layers[["research"]] %>%
-  st_buffer(dist = 500)
+  st_buffer(dist = 0.001371)
 
-challenge_buffer <- macleish_layers[["challenge_course"]] %>%
-  #st_buffer(dist = )
+challenge_buffer <- macleish_layers[["challenge_courses"]] %>%
+  st_buffer(dist = 0.001371)
 
 parking_buffer <- parking_sf 
 
@@ -124,7 +124,8 @@ leaflet() %>%
   
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
   
-  addPolygons(data = stream_buffer) 
+  addPolygons(data = stream_buffer)  %>%
+  addPolygons(data = research_buffer, color = "red") %>% addPolygons(data = challenge_buffer, color = "red")
   
   
 ```
