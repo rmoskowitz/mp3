@@ -12,7 +12,6 @@ output:
 MacLeish currently has two campsites - one large group site closer to the building and one remote campsite with two tent platforms about one mile from the parking area. We would like to develop one additional campsite that is approximately half a mile walk from the parking area, within 200’ of a stream or other source of water, in forest that is unlike the forest in the two other campsites, relatively flat, and at least 500’ from any research area or any element of the Challenge Course. Propose two new campsite locations for our consideration.
 
 
-
 #####Campsite recommendation
 Propose TWO campsite locations == make markers on the MAP
 make a buffer around a half mile walk from the parking area
@@ -34,6 +33,19 @@ group_campsite2 <-data.frame(lat = 42.458549, lon = -72.679581)
 parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 ```
 
+```{r}
+macleish_layers[["streams"]] %>%
+  st_buffer(dist = 0.1)
+
+**try to convert decimal degrees... to 200' **
+**500' buffer from any research area or any element of the challenge course**
+
+new_parking_lot <- st_as_sf(parking_lot)
+  st_buffer(dist = 0.5)
+  
+  ^^ how to buffer the parking lot??
+    
+```
 
 ```{r}
 leaflet() %>%
