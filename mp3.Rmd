@@ -47,13 +47,6 @@ parking_sf <- parking_lot %>%
 
 ```
 
-```{r}
-#transform the points to match the macleish crs
-df_crs <- st_transform(df_sf, crs = crs(manhattan, asText = TRUE))
-
-#buffer the point
-df_buf <- st_buffer(df_crs, dist = 1000)
-```
 
 ```{r}
 #decimal degrees to feet in order to correctly buffer
@@ -61,29 +54,16 @@ stream_buffer <- macleish_layers[["streams"]] %>%
   st_buffer(dist = 0.000549) %>%
   st_transform(4326)
 
-leaflet() %>%
-  addTiles() %>%
-  addPolylines(data = macleish_layers[["streams"]], 
-               weight = 1, color = "black") %>%
-  addPolygons(data = stream_buffer) 
-
-
+#this is the research buffer, translated to decimal degrees
 research_buffer <- macleish_layers[["research"]] %>%
   st_buffer(dist = 0.001371)
 
 challenge_buffer <- macleish_layers[["challenge_courses"]] %>%
   st_buffer(dist = 0.001371)
 
-parking_buffer <- parking_sf 
+parking_buffer <- parking_sf %>%
+  st_buffer(dist = )
 
-plot(stream_buffer)
-#try to convert decimal degrees... to 200' 
-#500' buffer from any research area or any element of the challenge course
-
-#new_parking_lot <- st_as_sf(parking_lot)
-  #st_buffer(dist = 0.5)
-  
-  #how to buffer the parking lot??
 ```
 
 
@@ -93,6 +73,9 @@ wetland_pal <- colorNumeric("viridis",
                   macleish_layers[["wetlands"]]$SHAPE_AREA)
 ```
 
+
+Interactive map with buffers: research
+This map shows.... (explain the buffers etc)
 ```{r}
 #interactive leaflet map w/ macleish_layers and own data added
 leaflet() %>%
@@ -126,10 +109,30 @@ leaflet() %>%
   
   addPolygons(data = stream_buffer)  %>%
   addPolygons(data = research_buffer, color = "red") %>% addPolygons(data = challenge_buffer, color = "red")
-  
-  
 ```
 
+
+Our second map shows the two campsites we have proposed.
+```{r}
+leaflet() %>%
+  addTiles() %>%
+  addPolylines(data = macleish_layers[["contours_3m"]], color = "black", weight = 1) %>%
+  
+    addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
+  
+  addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 3) %>%
+  
+  addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 2, opacity = 2) %>%
+
+  
+  addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
+  
+  addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
+  
+  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)")
+
+#add two new proposed sites without the addition of buffers
+```
 Notes for map: add legend ( addLegend("bottomright", 
     title = "MacLeish Layers",
     opacity = 1) ??) --> try to simplify as much as possible 
