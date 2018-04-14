@@ -96,8 +96,7 @@ parking_buffer <- parking_sf %>%
 res_challenge_union <- st_union(union1, union2)
 ```
 
-Interactive map with buffers: research
-This map shows.... (explain the buffers etc) has to be within the green and blue buffers but outside of the red buffers
+Our first map displayed below shows our process for determining where our campsite recommendations will go. This map shows a series of buffers that helped us determine our recommendation sites. The red buffer shows areas where our campsites cannot be located, because they are too close to a challenge course or research station. Our proposed sites must be located at an intersection between the green buffer and the blue buffers. These areas indicate locations that are close enough to the parking lot and within reasonable distance of a stream. This map also shows elevation data through contours, in order to understand which areas are relatively flat. Click on the blue pop-up markers to find where the existing campsites and parking lot are all located.
   
 ```{r}
 #interactive leaflet map w/ macleish_layers and own data added
@@ -136,9 +135,7 @@ leaflet() %>%
 ```
 
 
-Our second map shows the two campsites we have proposed. Input: description of this map
-
-also explain differences in vegetation type
+Our second map details our two campsite recommendations. These locations are displayed with blue pop-up markers. The two campsites we proposed are located in new vegetation types, are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on different parts of the map to find the vegetation type at that location. You can also click on the popups to see the existing campsites and our recommendation sites. 
 
 ```{r}
 #add two new campsites as data.frames
@@ -180,7 +177,7 @@ addPolygons(data = macleish_layers[["forests"]],
 
 ####Resources necessary to implement this recommendation
 
-With our findings, Smith College and the Macleish Field Station should plan on creating more campsites over the summer. However, there are many elements to be considerred beyond the placement of the campsites. First, the field station must consider the cost of the campsite. After talking to Reid Bertone-Johnson we learned that it costs around 200 dollars to build a standard tent platform and picnic table set up, and around 3,000 dollars to invest in a lean-to structure. The Field Station does not anticipate building another lean-to because of the lofty cost and labor. It would likely take a weekend to build a tent platform and picnic table, using labor from people already employed by the Center for the Environment, Ecological Design, and Sustainability. The only environmental concern is the location in proximity to a stream. The campsite should be close to a stream, but not too close as to cause erosion. The Field Station does not take run-off into account when building campsites as the area of a campsite is generally not large enough to cause any run-off issues. There are not any major roadblocks at this moment. The Field Station has the resources neccessary to build new campsites. 
+With our findings, Smith College and the Macleish Field Station should plan on creating more campsites over the summer. However, there are many elements to be considered beyond the placement of the campsites. First, the field station must consider the cost of the campsite. After talking to Reid Bertone-Johnson we learned that it costs around 200 dollars to build a standard tent platform and picnic table set up, and around 3,000 dollars to invest in a lean-to structure. The Field Station does not anticipate building another lean-to because of the lofty cost and labor. It would likely take a weekend to build a tent platform and picnic table, using labor from people already employed by the Center for the Environment, Ecological Design, and Sustainability. The only environmental concern is the location in proximity to a stream. The campsite should be close to a stream, but not too close as to cause erosion. The Field Station does not take run-off into account when building campsites as the area of a campsite is generally not large enough to cause any run-off issues. There are not any major roadblocks at this moment. The Field Station has the resources neccessary to build new campsites. 
 
 
 [^1]: [Link to github repository](https://github.com/rmoskowitz/mp3)
