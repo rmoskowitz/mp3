@@ -54,16 +54,24 @@ stream_buffer <- macleish_layers[["streams"]] %>%
   st_transform(4326)
 
 #this is the research buffer, with conversions for meters 
-research_buffer <- macleish_layers[["research"]] %>%
+research_buffers <- macleish_layers[["research"]] %>%
    st_transform(proj4_aea) %>%
   st_buffer(dist = 152.4) %>%
   st_transform(4326)
- 
+
+#get rid of overlap with st_union()
+research_buffer <- st_geometry(research_buffers)
+union1 <- st_union(research_buffer)
+
 #500' buffer around challenge courses
-challenge_buffer <- macleish_layers[["challenge_courses"]] %>%
+challenge_buffers <- macleish_layers[["challenge_courses"]] %>%
    st_transform(proj4_aea) %>%
   st_buffer(dist = 152.4) %>%
   st_transform(4326)
+
+#dissolve overlap with st_union()
+challenge_buffer <- st_geometry(challenge_buffers)
+union2 <- st_union(challenge_buffer)
 
 #half a mile buffer around our parking object
 parking_buffer <- parking_sf %>%
@@ -72,9 +80,7 @@ parking_buffer <- parking_sf %>%
   st_transform(4326)
 
 #use st_union() to group challenge course buffer and research buffers together
-res_challenge_union <- st_union(challenge_buffer, research_buffer)
-
-plot(res_challenge_union)
+res_challenge_union <- st_union(union1, union2)
 ```
 
 Interactive map with buffers: research
@@ -111,7 +117,7 @@ leaflet() %>%
   addPolygons(data = stream_buffer, stroke = TRUE, weight = 1, fill = TRUE)  %>%
   
 #adding the buffer: union of research and challenge course
-  addPolygons(data = res_challenge_union, fill = TRUE, fillOpacity = 0.025, color = "red", stroke = FALSE) %>%
+  addPolygons(data = res_challenge_union, fill = TRUE, fillOpacity = 0.5, color = "red", stroke = FALSE) %>%
   
   addPolygons(data = parking_buffer, fill = TRUE, color = "green", stroke = FALSE)
 ```
