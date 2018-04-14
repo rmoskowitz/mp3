@@ -171,9 +171,9 @@ addPolygons(data = macleish_layers[["forests"]],
   #addition of two proposed sites w/out any buffers
       addMarkers( data = new_campsite1, popup = "Proposed Group Campsite #1") %>%
 
-    addMarkers(data = new_campsite2, popup = "Proposed Group Campsite #2")
+    addMarkers(data = new_campsite2, popup = "Proposed Group Campsite #2") 
   
-  # %>% addLegend(pal = forest_pal, values = ~Sheet1__Ve, title = "Vegetation Type", opacity = 1)
+  # addLegend("bottomleft", pal = forest_pal, values = ~macleish_layers[["forests"]]$Sheet1__Na, title = "Vegetation Type")
 ```
 
 
