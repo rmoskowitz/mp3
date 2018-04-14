@@ -9,13 +9,6 @@ output:
     theme: "journal"
 ---
 
-To- do
-- Greta and Sonia work together on all the aesthetics, make the maps super pretty 
-- Greta work on writing up the "resources necessary to implement"
-- Rachel work on "campsite recommendation"
---> thoughts about a 3rd map (displayed first, that JUST shows vegetation type? with a color palette like == wetland_pal <- colorNumeric("viridis", 
-                  macleish_layers[["wetlands"]]$SHAPE_AREA) but obviously not for wetlands, for forests??)
-
 #####Problem statement: 
 MacLeish currently only has two campsites, one large group site close to the building, and a remote campsite with two tent platforms a mile away. There is a need for an additional campsite at the field station. There is an interest in developing a new campsite half a mile away from the parking area, within 200' of a stream or water source, 500' away from any research area or Challenge Course element, in a forest unlike the forest of the other two campsites, and relatively flat. All of these components must be present in a new campsite for consideration.
 
@@ -47,7 +40,6 @@ parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 #transforming parking lot data.frame to an sf object with defined projection
 parking_sf <- parking_lot %>%
   st_as_sf(coords = c("lon", "lat"), crs = 4326)
-
 ```
 
 
@@ -80,22 +72,19 @@ parking_buffer <- parking_sf %>%
   st_transform(4326)
 
 #use st_union() to group challenge course buffer and research buffers together
-res_challenge_union <- st_union(challenge_buffer, research_buffer, by_feature = FALSE)
+res_challenge_union <- st_union(challenge_buffer, research_buffer)
+
+plot(res_challenge_union)
 ```
 
-
 Interactive map with buffers: research
-This map shows.... (explain the buffers etc)
-click on different areas of the map to discover the vegetation type 
-
+This map shows.... (explain the buffers etc) has to be within the green and blue buffers but outside of the red buffers
+  
 ```{r}
 #interactive leaflet map w/ macleish_layers and own data added
 leaflet() %>%
   addTiles() %>%
 
-#displaying types of vegetation with popups
-  addPolygons(data = macleish_layers[["forests"]], color = "green", opacity = 5,  weight = 1, popup = ~Sheet1__Na) %>%
-  
 #how we showed the wetlands with popups
    addPolygons(data = macleish_layers[["wetlands"]], 
               color = "blue", 
@@ -124,28 +113,36 @@ leaflet() %>%
 #adding the buffer: union of research and challenge course
   addPolygons(data = res_challenge_union, fill = TRUE, fillOpacity = 0.025, color = "red", stroke = FALSE) %>%
   
-  addPolygons(data = parking_buffer, fill = TRUE, color = "brown", stroke = FALSE)
+  addPolygons(data = parking_buffer, fill = TRUE, color = "green", stroke = FALSE)
 ```
 
 
 Our second map shows the two campsites we have proposed. Input: description of this map
 
+also explain differences in vegetation type
 
 ```{r}
 #add two new campsites as data.frames
 new_campsite1 <-data.frame(lat= 42.445917, lon = -72.679673)
 new_campsite2 <-data.frame(lat = 42.448911, lon = -72.673964)
-```
 
-```{r}
-#leaflet- map #2 with tiles and base polylines and polygons
+#creating a color palette for forests
+forest_pal <-colorNumeric("Greens", macleish_layers[["forests"]]$Sheet1__Ve)
+
+#leaflet- map #2 with tiles and base polylines and polygons and vegetation
 leaflet() %>%
   addTiles() %>%
+  
+addPolygons(data = macleish_layers[["forests"]], 
+              color = ~forest_pal(Sheet1__Ve), 
+              fillOpacity = 0.8, weight = 0.1, 
+              popup = ~Sheet1__Na) %>%
+  
     addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
   
   addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 3) %>%
   
-  addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 2, opacity = 2) %>%
+  addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 1, opacity = 2) %>%
   
   addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
   
@@ -157,15 +154,9 @@ leaflet() %>%
       addMarkers( data = new_campsite1, popup = "Proposed Group Campsite #1") %>%
 
     addMarkers(data = new_campsite2, popup = "Proposed Group Campsite #2")
+  
+  # %>% addLegend(pal = forest_pal, values = ~Sheet1__Ve, title = "Vegetation Type", opacity = 1)
 ```
-
-Notes for map: add legend ( addLegend("bottomright", 
-    title = "MacLeish Layers",
-    opacity = 1) ??) --> try to simplify as much as possible 
-    
-#define color palettes (for forest & for wetlands...)
-wetland_pal <- colorNumeric("viridis", 
-                  macleish_layers[["wetlands"]]$SHAPE_AREA)
 
 
 #####Resources necessary to implement this recommendation
