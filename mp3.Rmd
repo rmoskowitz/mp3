@@ -14,11 +14,22 @@ MacLeish currently only has two campsites, one large group site close to the bui
 
 
 ####Campsite recommendation
-Our project proposes two new potential campsite locations for MacLeish. Our final recommendations for new campsite locations are shown in our map below with blue pop up identifiers. We used a github repository in order to keep track of and evaluate the spatial data necessary for making our recommendations [^1]. These locations were chosen based on the following criteria and spatial analysis procedures.   1. **Forests:**
+Our project proposes two new potential campsite locations for MacLeish. Our final recommendations for new campsite locations are shown in our map below with blue pop up identifiers. We used a github repository in order to keep track of and evaluate the spatial data necessary for making our recommendations [^1]. These locations were chosen based on the following criteria and spatial analysis procedures.
+
+
+1. **Forests:**
 Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these popups on the map below. We knew we could not place our new proposed campsites in either of these vegetation types. This limited our proposed campsites. We chose to place the campsites within the Sugar Maple Forest and the Hemlock Northern Hardwoods Forest.
+   
+   
    2. **Water source:** The ideal location for a campsite is within 200 feet of a stream or other water source, so the location can be near potable water. To find areas within 200 feet of a water source we used the buffer tool and were able to find areas next to streams. This is shown with the color blue in our map below. Both of our proposed campsites are within this area.
+  
+  
    3. **Research and challenge course:** Campsites cannot be located within a 500 foot radius of any research station or challenge course element. This allows research areas and challenge course users to function uninterrupted. To find this, we created buffers around these sites, and then used a union to join the buffers. This is shown in the map below in red, which indicates locations our proposed campsites cannot be located.
+   
+   
 4. **Parking lot:** For convenience, a campsite must be located within a half mile of the parking lot at the field station. We created a buffer to sites that fit this criteria. Both of our campsites fall within the half mile radius of the parking lot.
+
+
 5. **Elevation:** Because it is uncomfortable and unsafe to sleep on an incline, we took elevation data into account to find relatively flat locations for our campsites. We used 3 meter contours displayed in black below to determine which sites were relatively flat.
 
 
