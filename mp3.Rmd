@@ -21,13 +21,13 @@ MacLeish currently only has two campsites, one large group site close to the bui
 
 
 #####Campsite recommendation
-Our project proposese two new potential campsite locations for MacLeish. Our final recommendations for new campsite locations are shown in our map below with blue pop up identifiers. We used a github repository in order to keep track of and evaluate the spatial data necessary for making our recommendations [^1]. These locations were chosen based on the following criteria and spatial analysis procedures.
-1. Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these popups on the map below. We knew we could not place our new proposed campsites in either of these vegetation types. The limited our proposed campsites. We chose to place these campsites within the (name two other vegetation types)
-2. water source buffer info
-3. research and challenge course info
-4. away from parking lot info
-5. relatively flat info
-How we came to our final decision
+Our project proposes two new potential campsite locations for MacLeish. Our final recommendations for new campsite locations are shown in our map below with blue pop up identifiers. We used a github repository in order to keep track of and evaluate the spatial data necessary for making our recommendations [^1]. These locations were chosen based on the following criteria and spatial analysis procedures.
+1. Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these popups on the map below. We knew we could not place our new proposed campsites in either of these vegetation types. This limited our proposed campsites. We chose to place the campsites within the (name two other vegetation types)
+2. The ideal location for a campsite is within 200 feet of a stream or other water source, so the location can be near potable water. To find areas within 200 feet of a water source we used the buffer tool and were able to find areas next to streams.
+3. Campsites cannot be located within a 500 foot radius of any research station or challenge course element. This allows research areas and challenge course users to function uninterrupted. To find this, we used a union to join the challenge course and research station layers, and then created a buffer that went around both types of sites. 
+4. For convenience, a campsite must be located within a half mile of the parking lot at the field station. We created a buffer to cites that fit this criteria. Both of our campsites fall within the half mile radius of the parking lot.
+5. Because it is uncomfortable and unsafe to sleep on an incline, we took elevation data into account to find relatively flat locations for our campsites. 
+After taking vegetation type, water sources, research station, challenge course element, parking lot locations, and elevation into account, we were able to narrow our search to a handful of possible locations for the new campsites. We then narrowed our choices down to two proposed campsite locations. These locations are shown as blue popups in the second provided map.
 
 
 ```{r,  message = FALSE, warning = FALSE}
@@ -122,7 +122,7 @@ leaflet() %>%
   addPolygons(data = stream_buffer, stroke = TRUE, weight = 1, fill = TRUE)  %>%
   
 #adding the buffer: union of research and challenge course
-  addPolygons(data = res_challenge_union, fill = TRUE, fillOpacity = 2, color = "red", stroke = FALSE) %>%
+  addPolygons(data = res_challenge_union, fill = TRUE, fillOpacity = 0.025, color = "red", stroke = FALSE) %>%
   
   addPolygons(data = parking_buffer, fill = TRUE, color = "brown", stroke = FALSE)
 ```
@@ -169,16 +169,8 @@ wetland_pal <- colorNumeric("viridis",
 
 
 #####Resources necessary to implement this recommendation
-- These two campsites will cost
-- This will take....will cost 200 dollars for tent platform, 3000 dollars for lean-to (according to Reid Bertone-Johnson)
-- Concerns about environmental impact
-- major roadblocks...
-- can take a day for a tent platform, can  take several months to create a lean-to
-- no additional labor costs, money gets absorbed by CEEDS
-- main env concern== wants it to be close to a stream but not far enough away to cause erosion 
-- generall not really runoff problems from where they clear land because it just gets absobed by trees further down
 
-- Include relevant external information (look at macleish info)
+With our findings, Smith College and the Macleish Field Station should plan on creating more campsites over the summer. However, there are many elements to be considerred beyond the placement of the campsites. First, the field station must consider the cost of the campsite. After talking to Reid Bertone-Johnson we learned that it costs around 200 dollars to build a standard tent platform and picnic table set up, and around 3,000 dollars to invest in a lean-to structure. The Field Station does not anticipate building another lean-to because of the lofty cost and labor. It would likely take a weekend to build a tent platform and picnic table, using labor from people already employed by the Center for the Environment, Ecological Design, and Sustainability. The only environmental concern is the location in proximity to a stream. The campsite should be close to a stream, but not too close as to cause erosion. The Field Station does not take run-off into account when building campsites as the area of a campsite is generally not large enough to cause any run-off issues. There are not any major roadblocks at this moment. The Field Station has the resources neccessary to build new campsites. 
 
 
 [^1]: [Link to github repository](https://github.com/rmoskowitz/mp3)
