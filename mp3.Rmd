@@ -19,7 +19,7 @@ Our project proposes two new potential campsite locations for MacLeish. Our fina
 
 
 1. **Forests:**
-Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these popups on the map below. We chose to place the campsites within an Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest instead.
+Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these pop-ups on the map below. We chose to place the campsites within an Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest instead.
    
    
    2. **Water source:** The ideal location for a campsite is within 200 feet of a stream. To find areas within 200 feet of a water source we used the buffer tool and were able to find areas next to streams. 
@@ -170,7 +170,7 @@ addPolygons(data = macleish_layers[["forests"]],
 
 
 ####**Map #3**: Recommendations
-The two campsites we proposed are located in new vegetation types (Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest), are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on the popups to see the existing campsites and our recommendation sites. 
+The two campsites we proposed are located in new vegetation types (Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest), are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on the pop-ups to see the existing campsites and our recommendation sites. 
 
 ```{r}
 #add two new campsites as data.frames
@@ -199,7 +199,7 @@ leaflet() %>%
 
 ####**Resources necessary to implement this recommendation**
 
-With our findings, Smith College and the Macleish Field Station should plan on creating more campsites over the summer. However, there are many elements to be considered beyond the placement of the campsites. First, the field station must consider the cost of the campsite. After talking to Reid Bertone-Johnson we learned that it costs around 200 dollars to build a standard tent platform and picnic table set up, and around 3,000 dollars to invest in a lean-to structure. The Field Station does not anticipate building another lean-to because of the lofty cost and labor. It would likely take a weekend to build a tent platform and picnic table, using labor from people already employed by the Center for the Environment, Ecological Design, and Sustainability. The only environmental concern is the location in proximity to a stream. The campsite should be close to a stream, but not too close as to cause erosion. The Field Station does not take run-off into account when building campsites as the area of a campsite is generally not large enough to cause any run-off issues. There are not any major roadblocks at this moment. The Field Station has the resources neccessary to build new campsites. 
+With our findings, Smith College and the Macleish Field Station should plan on creating more campsites over the summer. However, there are many elements to be considered beyond the placement of the campsites. First, the field station must consider the cost of the campsite. After talking to Reid Bertone-Johnson we learned that it costs around 200 dollars to build a standard tent platform and picnic table set up, and around 3,000 dollars to invest in a lean-to structure. The Field Station does not anticipate building another lean-to because of the lofty cost and labor. It would likely take a weekend to build a tent platform and picnic table, using labor from people already employed by the Center for the Environment, Ecological Design, and Sustainability. The only environmental concern is the location in proximity to a stream. The campsite should be close to a stream, but not too close as to cause erosion. The Field Station does not take runoff into account when building campsites as the area of a campsite is generally not large enough to cause any run-off issues. There are not any major roadblocks at this moment. The Field Station has the resources necessary to build new campsites. 
 
 
 [^1]: [Link to github repository](https://github.com/rmoskowitz/mp3)
