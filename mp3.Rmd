@@ -44,7 +44,7 @@ library(macleish)
 library(leaflet)
 ```
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #we added the existing group campsites as data.frames
 group_campsite1 <- data.frame(lat = 42.450976, lon = -72.678154)
 group_campsite2 <-data.frame(lat = 42.458549, lon = -72.679581)
@@ -54,10 +54,7 @@ parking_lot <-data.frame(lat = 42.448013, lon = -72.680663)
 #transforming parking lot data.frame to an sf object with defined projection
 parking_sf <- parking_lot %>%
   st_as_sf(coords = c("lon", "lat"), crs = 4326)
-```
 
-
-```{r, message = FALSE, warning = FALSE}
 #projection for our buffers
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 
@@ -139,9 +136,10 @@ leaflet() %>%
    addLegend("bottomright", colors = c("red","blue"), labels = c("No campsites allowed", "Possible campsite locations"), title = "Buffers")
 ```
 
+
+
 ####Map #2: Vegetation
 Click on different parts of the map to find the vegetation type at that location. 
-
 ```{r, message = FALSE, warning = FALSE}
 #creating a color palette for forests
 forest_pal <-colorFactor("Dark2", macleish_layers[["forests"]]$Sheet1__Na)
@@ -166,11 +164,10 @@ addPolygons(data = macleish_layers[["forests"]],
 
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
   
-  addLegend("bottomleft", pal = forest_pal, values = macleish_layers[["forests"]]$Sheet1__Na, title = "Vegetation Type") %>%
-
-   addMarkers( data = new_campsite1, popup = "Proposed Group Campsite #1") %>%
-    addMarkers(data = new_campsite2, popup = "Proposed Group Campsite #2")  
+  addLegend("bottomleft", pal = forest_pal, values = macleish_layers[["forests"]]$Sheet1__Na, title = "Vegetation Type")  
 ```
+
+
 
 ####Map #3: Recommendations
 The two campsites we proposed are located in new vegetation types (Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest), are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on the popups to see the existing campsites and our recommendation sites. 
