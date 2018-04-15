@@ -19,7 +19,7 @@ Our project proposes two new potential campsite locations for MacLeish. Our fina
 
 
 1. **Forests:**
-Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these popups on the map below. We chose to place the campsites within the Sugar Maple Forest and the Hemlock Northern Hardwoods Forest instead.
+Campsites must be located in a forest unlike the forest of the other two campsites. The existing campsites are located in an Old Field White Pine Forest and a Sugar Maple Forest, which can be found by clicking on the vegetation near these popups on the map below. We chose to place the campsites within an Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest instead.
    
    
    2. **Water source:** The ideal location for a campsite is within 200 feet of a stream. To find areas within 200 feet of a water source we used the buffer tool and were able to find areas next to streams. 
@@ -166,11 +166,14 @@ addPolygons(data = macleish_layers[["forests"]],
 
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
   
-  addLegend("bottomleft", pal = forest_pal, values = macleish_layers[["forests"]]$Sheet1__Na, title = "Vegetation Type")
+  addLegend("bottomleft", pal = forest_pal, values = macleish_layers[["forests"]]$Sheet1__Na, title = "Vegetation Type") %>%
+
+   addMarkers( data = new_campsite1, popup = "Proposed Group Campsite #1") %>%
+    addMarkers(data = new_campsite2, popup = "Proposed Group Campsite #2")  
 ```
 
 ####Map #3: Recommendations
-The two campsites we proposed are located in new vegetation types, are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on the popups to see the existing campsites and our recommendation sites. 
+The two campsites we proposed are located in new vegetation types (Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest), are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on the popups to see the existing campsites and our recommendation sites. 
 
 ```{r}
 #add two new campsites as data.frames
