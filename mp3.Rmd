@@ -95,12 +95,15 @@ parking_buffer <- parking_sf %>%
 
 #use st_union() to group challenge course buffer and research buffers together
 res_challenge_union <- st_union(union1, union2)
+
+#intersect the parking lot buffer and the stream buffer to identify locations where campsites could be built
+parking_stream <- st_intersection(parking_buffer, stream_buffer)
 ```
 
 ####Map #1: Buffers and contours
 Our first map displayed below shows our process for determining where our campsite recommendations will go. The red buffer shows areas where our campsites cannot be located, because they are too close to a challenge course or research station. Our proposed sites must be located at an intersection between the green buffer and the blue buffers. These areas indicate locations that are close enough to the parking lot and within reasonable distance of a stream. This map also shows elevation data through contours, in order to understand which areas are relatively flat. Click on the blue pop-up markers to find where the existing campsites and parking lot are all located.
   
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #interactive leaflet map w/ macleish_layers and own data added
 leaflet() %>%
   addTiles() %>%
@@ -127,32 +130,29 @@ leaflet() %>%
   
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
 
-#add stream buffer 
-  addPolygons(data = stream_buffer, stroke = TRUE, weight = 1, fill = TRUE)  %>%
+#add stream/ parking lot intersected buffer 
+  addPolygons(data = parking_stream, stroke = TRUE, weight = 1, fill = TRUE, color = "blue")  %>%
   
 #adding the buffer: union of research and challenge course
   addPolygons(data = res_challenge_union, fill = TRUE, fillOpacity = 0.5, color = "red", stroke = FALSE) %>%
   
-  addPolygons(data = parking_buffer, fill = TRUE, color = "green", stroke = FALSE)
+   addLegend("bottomright", colors = c("red","blue"), labels = c("No campsites allowed", "Possible campsite locations"), title = "Buffers")
 ```
 
-####Map #2: Vegetation and recommendations
-The two campsites we proposed are located in new vegetation types, are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on different parts of the map to find the vegetation type at that location. You can also click on the popups to see the existing campsites and our recommendation sites. 
+####Map #2: Vegetation
+Click on different parts of the map to find the vegetation type at that location. 
 
-```{r}
-#add two new campsites as data.frames
-new_campsite1 <-data.frame(lat= 42.445917, lon = -72.679673)
-new_campsite2 <-data.frame(lat = 42.448911, lon = -72.673964)
-
+```{r, message = FALSE, warning = FALSE}
 #creating a color palette for forests
-forest_pal <-colorNumeric("Greens", macleish_layers[["forests"]]$Sheet1__Ve)
+forest_pal <-colorFactor("Dark2", macleish_layers[["forests"]]$Sheet1__Na)
 
 #leaflet- map #2 with tiles and base polylines and polygons and vegetation
 leaflet() %>%
   addTiles() %>%
-  
+
+#adding forests  
 addPolygons(data = macleish_layers[["forests"]], 
-              color = ~forest_pal(Sheet1__Ve), 
+              color = ~forest_pal(Sheet1__Na), 
               fillOpacity = 0.8, weight = 0.1, 
               popup = ~Sheet1__Na) %>%
   
@@ -163,17 +163,37 @@ addPolygons(data = macleish_layers[["forests"]],
   addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 1, opacity = 2) %>%
   
   addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
+
+  addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
   
-  addMarkers(lng= ~lon, lat = ~lat, data = parking_lot, popup = "MacLeish Parking Lot") %>%
+  addLegend("bottomleft", pal = forest_pal, values = macleish_layers[["forests"]]$Sheet1__Na, title = "Vegetation Type")
+```
+
+####Map #3: Recommendations
+he two campsites we proposed are located in new vegetation types, are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on the popups to see the existing campsites and our recommendation sites. 
+
+```{r}
+#add two new campsites as data.frames
+new_campsite1 <-data.frame(lat= 42.445917, lon = -72.679673)
+new_campsite2 <-data.frame(lat = 42.448911, lon = -72.673964)
+
+#new leaflet map displaying new popups for recommendations
+leaflet() %>%
+  addTiles() %>%
+  
+ addPolylines(data = macleish_layers[["trails"]], color = "brown", weight = 1) %>%
+  
+  addPolylines(data = macleish_layers[["streams"]], color = "blue", weight = 3) %>%
+  
+  addPolygons(data = macleish_layers[["boundary"]], stroke = TRUE, color = "black", fill = NA, weight = 1, opacity = 2) %>%
+  
+  addMarkers(lng = ~lon, lat = ~lat, data = group_campsite1, popup = "Current Group Campsite") %>%
   
   addMarkers (lng = ~lon, lat = ~lat, data = group_campsite2, popup = "Current Group Campsite (Remote)") %>%
 
   #addition of two proposed sites w/out any buffers
       addMarkers( data = new_campsite1, popup = "Proposed Group Campsite #1") %>%
-
     addMarkers(data = new_campsite2, popup = "Proposed Group Campsite #2") 
-  
-  # addLegend("bottomleft", pal = forest_pal, values = ~macleish_layers[["forests"]]$Sheet1__Na, title = "Vegetation Type")
 ```
 
 
