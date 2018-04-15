@@ -1,20 +1,20 @@
 ---
-title: "Camping is In-Tents: MacLeish Site Recommendations"
+title: "Camping is In-Tents: New MacLeish Sites"
 author: Rachel Moskowitz, Sonia Garfinkel, and Greta Mundt
 date: April 13, 2018
 output: 
   html_document:
     df_print: paged
     code_folding: hide
-    theme: "journal"
+    theme: "sandstone"
 ---
 
 
-####Problem statement
+####**Problem statement**
 MacLeish currently only has two campsites. There is a need for an additional campsite at the field station. There is an interest in developing a new campsite half a mile away from the parking area, within 200' of a stream or water source, 500' away from any research area or Challenge Course element, in a forest unlike the forest of the other two campsites, and relatively flat. 
 
 
-####Campsite recommendation
+####**Campsite recommendation**
 Our project proposes two new potential campsite locations for MacLeish. Our final recommendations for new campsite locations are shown in our map below with blue pop up identifiers. We used a github repository in order to keep track of and evaluate the spatial data necessary for making our recommendations [^1]. These locations were chosen based on the following criteria.
 
 
@@ -97,7 +97,7 @@ res_challenge_union <- st_union(union1, union2)
 parking_stream <- st_intersection(parking_buffer, stream_buffer)
 ```
 
-####Map #1: Buffers and contours
+####**Map #1**: Buffers and contours
 Our first map displayed below shows our process for determining where our campsite recommendations will go. The red buffer shows areas where our campsites cannot be located, because they are too close to a challenge course or research station. Our proposed sites must be located at an intersection between the green buffer and the blue buffers. These areas indicate locations that are close enough to the parking lot and within reasonable distance of a stream. This map also shows elevation data through contours, in order to understand which areas are relatively flat. Click on the blue pop-up markers to find where the existing campsites and parking lot are all located.
   
 ```{r, message = FALSE, warning = FALSE}
@@ -138,7 +138,7 @@ leaflet() %>%
 
 
 
-####Map #2: Vegetation
+####**Map #2**: Vegetation
 Click on different parts of the map to find the vegetation type at that location. 
 ```{r, message = FALSE, warning = FALSE}
 #creating a color palette for forests
@@ -169,7 +169,7 @@ addPolygons(data = macleish_layers[["forests"]],
 
 
 
-####Map #3: Recommendations
+####**Map #3**: Recommendations
 The two campsites we proposed are located in new vegetation types (Active Pasture and Hayfield and the Hemlock Northern Hardwoods Forest), are in relatively flat areas, within 200' from a water source, and outside of the buffers around the challenge course elements and research stations. Click on the popups to see the existing campsites and our recommendation sites. 
 
 ```{r}
@@ -197,7 +197,7 @@ leaflet() %>%
 ```
 
 
-####Resources necessary to implement this recommendation
+####**Resources necessary to implement this recommendation**
 
 With our findings, Smith College and the Macleish Field Station should plan on creating more campsites over the summer. However, there are many elements to be considered beyond the placement of the campsites. First, the field station must consider the cost of the campsite. After talking to Reid Bertone-Johnson we learned that it costs around 200 dollars to build a standard tent platform and picnic table set up, and around 3,000 dollars to invest in a lean-to structure. The Field Station does not anticipate building another lean-to because of the lofty cost and labor. It would likely take a weekend to build a tent platform and picnic table, using labor from people already employed by the Center for the Environment, Ecological Design, and Sustainability. The only environmental concern is the location in proximity to a stream. The campsite should be close to a stream, but not too close as to cause erosion. The Field Station does not take run-off into account when building campsites as the area of a campsite is generally not large enough to cause any run-off issues. There are not any major roadblocks at this moment. The Field Station has the resources neccessary to build new campsites. 
 
